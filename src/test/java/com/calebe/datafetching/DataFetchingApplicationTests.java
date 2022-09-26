@@ -18,4 +18,9 @@ class DataFetchingApplicationTests {
 		productService.countProductsByCompany(1);
 	}
 
+	@Test
+	void testLazyFetching() {
+		productService.countProductsByCompanyLazily(1);
+	}
+
 }
