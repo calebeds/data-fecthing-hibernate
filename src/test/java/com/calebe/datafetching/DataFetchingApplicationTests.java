@@ -34,5 +34,14 @@ class DataFetchingApplicationTests {
 		LazyCompany company = productService.findCompanyById(1);
 		productService.countProductsByCompany(company);
 	}
+	@Test
+	void testLazyFetchingWithInternalHibernateDifferentTx() {
+		productService.countProductsByCompanyLazilyWithInternalHibernateAPI(1);
+	}
+	@Test
+	void testNPlusOneProblem() {
+		productService.countAvailableProducts();
+	}
+
 
 }
