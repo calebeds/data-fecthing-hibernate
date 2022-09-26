@@ -62,7 +62,7 @@ public class ProductService {
 
     @Transactional
     public int countAvailableProducts() {
-        TypedQuery<LazyCompany> companyTypedQuery = entityManager.createQuery("FROM LazyCompany company", LazyCompany.class);
+        TypedQuery<LazyCompany> companyTypedQuery = entityManager.createQuery("FROM LazyCompany company JOIN FETCH company.products", LazyCompany.class);
         List<LazyCompany> companies = companyTypedQuery.getResultList();
         int productCount = 0;
         for(LazyCompany company: companies) {
