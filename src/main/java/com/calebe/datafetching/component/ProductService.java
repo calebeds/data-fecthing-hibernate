@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Service
@@ -65,5 +69,25 @@ public class ProductService {
             productCount += company.getProducts().size();
         }
         return productCount;
+    }
+
+    @Transactional
+    public int countProductsByCompanyWithJPQL(int companyId) {
+        TypedQuery<LazyCompany> query = entityManager.createQuery("FROM LazyCompany company JOIN FETCH company.products WHERE company.id = :id", LazyCompany.class);
+        query.setParameter("id", companyId);
+        LazyCompany company = query.getSingleResult();
+        return company.getProducts().size();
+    }
+
+    @Transactional
+    public int countProductsByCompanyWithCriteriaAPI(int companyId) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<LazyCompany> cq = cb.createQuery(LazyCompany.class);
+        Root<LazyCompany> from = cq.from(LazyCompany.class);
+        from.fetch("products");
+        cq.where(cb.equal(from.get("id"), companyId));
+        TypedQuery<LazyCompany> query = entityManager.createQuery(cq);
+        LazyCompany company = query.getSingleResult();
+        return company.getProducts().size();
     }
 }

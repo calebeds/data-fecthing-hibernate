@@ -43,5 +43,14 @@ class DataFetchingApplicationTests {
 		productService.countAvailableProducts();
 	}
 
+	@Test
+	void testJPQLFetching() {
+		productService.countProductsByCompanyWithJPQL(1);
+	}
+	@Test
+	void testCriteriaAPIFetching() {
+		productService.countProductsByCompanyWithCriteriaAPI(1);
+	}
+
 
 }
