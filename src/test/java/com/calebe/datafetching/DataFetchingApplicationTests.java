@@ -1,6 +1,7 @@
 package com.calebe.datafetching;
 
 import com.calebe.datafetching.component.ProductService;
+import com.calebe.datafetching.lazy.LazyCompany;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +22,17 @@ class DataFetchingApplicationTests {
 	@Test
 	void testLazyFetching() {
 		productService.countProductsByCompanyLazily(1);
+	}
+
+	@Test
+	void testLazyInitializationException() {
+		productService.countProductsByCompanyLazilyWithoutTx(1);
+	}
+
+	@Test
+	void testLazyInitializationExceptionWithingDifferentTx() {
+		LazyCompany company = productService.findCompanyById(1);
+		productService.countProductsByCompany(company);
 	}
 
 }

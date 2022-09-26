@@ -24,8 +24,25 @@ public class ProductService {
     }
 
     @Transactional
+    public int countProductsByCompany(LazyCompany company) {
+        company = entityManager.merge(company);
+        return company.getProducts().size();
+    }
+
+    @Transactional
     public int countProductsByCompanyLazily(int companyId) {
         LazyCompany company = entityManager.find(LazyCompany.class, companyId);
         return company.getProducts().size();
+    }
+
+    public int countProductsByCompanyLazilyWithoutTx(int companyId) {
+        LazyCompany company = entityManager.find(LazyCompany.class, companyId);
+        return company.getProducts().size();
+
+    }
+
+    @Transactional
+    public LazyCompany findCompanyById(int companyId) {
+        return entityManager.find(LazyCompany.class, companyId);
     }
 }
