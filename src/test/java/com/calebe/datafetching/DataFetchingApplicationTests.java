@@ -51,6 +51,19 @@ class DataFetchingApplicationTests {
 	void testCriteriaAPIFetching() {
 		productService.countProductsByCompanyWithCriteriaAPI(1);
 	}
+	@Test
+	void testJPQLProjection() {
+		productService.findCompanyProjectionWithJPQLById(1);
+	}
 
+	@Test
+	void testCriteriaApiProjection() {
+		productService.findCompanyProjectionWithCriteriaAPIById(1);
+	}
+
+	@Test
+	void testSpringDataProjection() {
+		productService.findCompanyProjectionSpringDataById(1);
+	}
 
 }

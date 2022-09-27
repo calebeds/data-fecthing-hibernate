@@ -12,8 +12,16 @@ public class LazyProduct {
 
     @JoinColumn(name = "company_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    public EagerCompany company;
+    public LazyCompany company;
     public int stock;
+
+    public LazyCompany getCompany() {
+        return company;
+    }
+
+    public void setCompany(LazyCompany company) {
+        this.company = company;
+    }
 
     public LazyProduct() {
     }

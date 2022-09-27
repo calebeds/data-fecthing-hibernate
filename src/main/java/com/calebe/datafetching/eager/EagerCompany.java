@@ -10,6 +10,7 @@ public class EagerCompany {
     @Id
     private int id;
     private String name;
+    private String founderName;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company")
     private Set<EagerProduct> products = new HashSet<>();
@@ -43,5 +44,11 @@ public class EagerCompany {
         this.products = products;
     }
 
+    public String getFounderName() {
+        return founderName;
+    }
 
+    public void setFounderName(String founderName) {
+        this.founderName = founderName;
+    }
 }

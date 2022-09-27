@@ -12,6 +12,7 @@ public class LazyCompany {
     @Id
     private int id;
     private String name;
+    private String founderName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<LazyProduct> products = new HashSet<>();
@@ -43,5 +44,17 @@ public class LazyCompany {
 
     public void setProducts(Set<LazyProduct> products) {
         this.products = products;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFounderName() {
+        return founderName;
+    }
+
+    public void setFounderName(String founderName) {
+        this.founderName = founderName;
     }
 }
